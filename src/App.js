@@ -18,17 +18,22 @@ class App extends React.Component {
     if (this.state.isBlocked) {
       console.log('Permission Denied');
     } else {
-      Mp3Recorder.start().then(() => {
-        this.setState({ isRecording: true });
-      }).catch((e) => console.error(e));
+      Mp3Recorder
+        .start()
+        .then(() => {
+          this.setState({ isRecording: true });
+        }).catch((e) => console.error(e));
     }
   };
 
   stop = () => {
-    Mp3Recorder.stop().getMp3().then( async ([buffer, blob]) => {
-      const blobURL = URL.createObjectURL(blob)
-      this.setState({ blobURL, isRecording: false });
-    }).catch((e) => console.log(e));
+    Mp3Recorder
+      .stop()
+      .getMp3()
+      .then(([buffer, blob]) => {
+        const blobURL = URL.createObjectURL(blob)
+        this.setState({ blobURL, isRecording: false });
+      }).catch((e) => console.log(e));
   };
 
   componentDidMount() {
